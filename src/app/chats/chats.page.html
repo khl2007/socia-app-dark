@@ -1,0 +1,31 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+       <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>chats</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" src="*"></ion-icon>
+       </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+	
+<ion-list *ngFor="let userfr of friends ">
+  <ion-item>
+          <ion-avatar slot="start" [routerLink]="['/chats/chat', userfr.fuserid]">
+            <img [src]=userfr.useravtar>
+          </ion-avatar>
+          <ion-label>
+            <h2>{{userfr.user}}</h2>
+            
+            <p>{{userfr.lastmsg}}</p>
+          </ion-label>
+        </ion-item>
+
+ 
+</ion-list>
+</ion-content>
