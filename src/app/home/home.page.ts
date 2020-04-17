@@ -126,7 +126,7 @@ async presentcommtsModal(poid) {
             if (followinguser[0]) {
               this.isliked=true;
              this.firebaseService.removeLike(blogid);
-            } else 
+            }
           });
        
   }
