@@ -28,10 +28,11 @@
 
 		<ion-img *ngIf="blog.bimgurl" [src]="blog.bimgurl" (tap)="tapPhotoLike($event)"></ion-img>
 
-
+{{ blog.heartbutton }}
 		<ion-item color="secondary">
-			<ion-button fill="clear" clear ion-button icon-only (click)="likeButton()" class="like-btn">
-				<ion-icon no-padding [name]="like_btn.icon_name" color="{{ like_btn.color }}" class="icon-space">
+			<ion-button fill="clear" clear ion-button icon-only (click)="likeButton(blog.blogrefid)" class="like-btn" color="{{ blog.heartbutton }}">
+				<ion-icon no-padding name="heart-outline"  class="icon-space">
+          
 				</ion-icon>
 			</ion-button>
 			<ion-button fill="clear" color="primary" ion-button icon-only (click)="presentcommtsModal(blog.blogrefid) ">

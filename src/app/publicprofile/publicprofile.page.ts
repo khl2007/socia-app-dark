@@ -8,7 +8,7 @@ import { Blogitem } from "../services/blogitem";
 import { User } from "../services/user";
 
 import { flatMap, map } from "rxjs/operators";
-
+ 
 import { FirebaseService } from "../services/firebase.service";
 //import { Animation, AnimationController } from '@ionic/angular';
 import { FollowService } from "../services/follow.service";

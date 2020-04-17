@@ -37,9 +37,9 @@ items: Array<any>;
     color: "secondary",
     icon_name: "heart-outline"
   };
-
+  isliked=false;
   public tap: number = 0;
-
+ 
   constructor(
     public loadingCtrl: LoadingController,
     private authService: AuthService,
@@ -117,16 +117,18 @@ async presentcommtsModal(poid) {
   async presentLoading(loading) {
     return await loading.present();
   }
+  
+  likeButton(blogid) {
+   
+  let isliked=false;
+    this.firebaseService.isLiked(blogid).subscribe(followinguser => {
 
-  likeButton() {
-    if (this.like_btn.icon_name === "heart-outline") {
-      this.like_btn.icon_name = "heart";
-      this.like_btn.color = "danger";
-      // Do some API job in here for real!
-    } else {
-      this.like_btn.icon_name = "heart-outline";
-      this.like_btn.color = "black";
-    }
+            if (followinguser[0]) {
+              this.isliked=true;
+             this.firebaseService.removeLike(blogid);
+            } else 
+          });
+       
   }
 
 /*getLikes(pid) {

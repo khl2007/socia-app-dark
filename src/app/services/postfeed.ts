@@ -7,5 +7,7 @@ export interface Feed {
   bimgurl?: string;
   likes? : string;
   crtd? : string;
+  isliked? : boolean;
+  heartbutton  : string;
 }
 

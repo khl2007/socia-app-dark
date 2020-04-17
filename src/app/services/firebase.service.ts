@@ -15,7 +15,6 @@ import { Userfriends } from "./userfriends";
 import { Feed } from "./postfeed";
 import { Commentitem } from "./comment";
 
-
 import { flatMap, map } from "rxjs/operators";
 
 import { User } from "./user";
@@ -27,19 +26,19 @@ export class FirebaseService {
   private snapshotChangesSubscription: any;
 
   blogsRef: AngularFirestoreCollection<Blogitem>;
-  commsRef:AngularFirestoreCollection<any>
+  commsRef: AngularFirestoreCollection<any>;
   chatref: AngularFirestoreCollection<any>;
   userfriends: Observable<Userfriends[]>;
-   
-  chatfriref : AngularFirestoreCollection<any>;
+
+  chatfriref: AngularFirestoreCollection<any>;
 
   userchats: Observable<any[]>;
-
+  curentuserid :any;
   feedItem: Observable<Feed[]>;
   feeditems: any[];
   commItem: Observable<Commentitem[]>;
   commitems: any[];
-
+  islikedref = false;
   private userDoc: AngularFirestoreDocument<User>;
   private userDocc: AngularFirestoreCollection<User>;
 
@@ -47,6 +46,7 @@ export class FirebaseService {
     //this.userDocc = this.afs.collection("/users");
     //this.getChats();
     // this.blogsRef = this.afs.collection("/blogs");
+    //this.curentuserid = firebase.auth().currentUser.uid;
   }
 
   getTasks() {
@@ -67,14 +67,14 @@ export class FirebaseService {
   getBlogs() {
     return this.afs.collection("/blogs");
   }
-  getComments(poid){
-  let currentUser = firebase.auth().currentUser.uid;
-  this.commsRef = this.afs.collection("comments", ref =>
-        ref
-          .orderBy("crtd", "desc")
-          .limit(100)
-          .where("pid", "==", poid)
-      );
+  getComments(poid) {
+    let currentUser = firebase.auth().currentUser.uid;
+    this.commsRef = this.afs.collection("comments", ref =>
+      ref
+        .orderBy("crtd", "desc")
+        .limit(100)
+        .where("pid", "==", poid)
+    );
     this.commItem = this.commsRef.snapshotChanges().pipe(
       map(changes => {
         return changes.map(c => {
@@ -107,11 +107,11 @@ export class FirebaseService {
       flatMap(comms => combineLatest(comms))
     );
     console.log(this.commItem);
-return this.commItem;
+    return this.commItem;
   }
 
-addComment(poid , comment){
-   return new Promise<any>((resolve, reject) => {
+  addComment(poid, comment) {
+    return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser.uid;
       let data = {
         pid: poid,
@@ -123,10 +123,8 @@ addComment(poid , comment){
         .collection("comments")
         .add(data)
         .then(res => resolve(res), err => reject(err));
-
-     
     });
-}
+  }
 
   collectionInitialization(userid) {
     if (userid) {
@@ -153,6 +151,22 @@ addComment(poid , comment){
           const blgimg = data.imgurl;
           const bloglikes = data.likes;
           const blogcrtd = data.crtd;
+          
+          let heartbutton = "danger";
+            this.isLiked(blogid).subscribe(followinguser => {
+            
+            if (followinguser[0]) {
+              heartbutton ="danger";
+             return  this.setliked(true);
+            
+            }
+          });
+          
+          if (this.islikedref) {
+            heartbutton = "danger";
+          } else {
+             heartbutton = "primary"; 
+          }
           //this.startq = c[0].payload.doc;
 
           return this.afs
@@ -168,7 +182,8 @@ addComment(poid , comment){
                   body: blgbody,
                   bimgurl: blgimg,
                   crtd: blogcrtd,
-                  likes: bloglikes
+                  likes: bloglikes,
+                  heartbutton : heartbutton
                 });
               })
             );
@@ -176,9 +191,10 @@ addComment(poid , comment){
       }),
       flatMap(feeds => combineLatest(feeds))
     );
-
   }
-
+setliked(val){
+this.islikedref = val;
+}
   sellectAllNews() {
     let x = null;
 
@@ -237,12 +253,12 @@ addComment(poid , comment){
       .doc(currentUser)
       .collection("friends")
       .doc(receverid)
-      .collection('msgs' , ref => ref.orderBy('createdat', 'desc'));
+      .collection("msgs", ref => ref.orderBy("createdat", "desc"));
     this.userchats = this.chatref.valueChanges();
     return this.userchats;
   }
 
-getChatsFri() {
+  getChatsFri() {
     //get the loged in user id
     let currentUser = firebase.auth().currentUser.uid;
     //this.afs.collection("people").doc(currentUser.uid).collection("tasks").snapshotChanges();
@@ -252,14 +268,14 @@ getChatsFri() {
       .collection("chats")
       .doc(currentUser)
       .collection("friends");
-    this.userfriends  = this.chatfriref.snapshotChanges().pipe(
+    this.userfriends = this.chatfriref.snapshotChanges().pipe(
       map(changes => {
         return changes.map(c => {
           // this.lastVisible = c[0].payload.doc;
           const data = c.payload.doc.data();
           const userid = c.payload.doc.id;
           const lastmsgg = data.lastmsg;
-          console.log('hi',userid);
+          console.log("hi", userid);
           return this.afs
             .doc("users/" + userid)
             .valueChanges()
@@ -269,7 +285,7 @@ getChatsFri() {
                   fuserid: userid,
                   user: userData.displayName,
                   useravtar: userData.avatar,
-                  lastmsg : lastmsgg
+                  lastmsg: lastmsgg
                 });
               })
             );
@@ -277,18 +293,14 @@ getChatsFri() {
       }),
       flatMap(userfeeds => combineLatest(userfeeds))
     );
-
-   
   }
 
-InitChatfri(){
-this.getChatsFri();
+  InitChatfri() {
+    this.getChatsFri();
 
-return this.userfriends;
+    return this.userfriends;
+  }
 
-
-}
-  
   addChat(msg, receverid) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser.uid;
@@ -299,11 +311,11 @@ return this.userfriends;
       };
       let cur = {
         frid: currentUser,
-        lastmsg : msg
+        lastmsg: msg
       };
-       let rec = {
+      let rec = {
         frid: receverid,
-        lastmsg : msg
+        lastmsg: msg
       };
 
       this.afs
@@ -321,7 +333,7 @@ return this.userfriends;
         .collection("friends")
         .doc(receverid)
         .set(rec)
-        .then(res => resolve(res), err => reject(err)); 
+        .then(res => resolve(res), err => reject(err));
 
       this.afs
         .collection("chats")
@@ -332,7 +344,7 @@ return this.userfriends;
         .add(data)
         .then(res => resolve(res), err => reject(err));
 
-        this.afs
+      this.afs
         .collection("chats")
         .doc(receverid)
         .collection("friends")
@@ -401,28 +413,43 @@ return this.userfriends;
         .then(res => resolve(res), err => reject(err));
     });
   }
+  isLiked(pid) {
+    let currentUser = firebase.auth().currentUser.uid;
+    return this.afs
+      .collection<any>("/blogs/" + pid + "/likesc", ref =>
+        ref.where("uid", "==", currentUser)
+      )
+      .valueChanges();
+  }
 
-getLikes(pid) {
-    return this.afs.collection('blogs/' + pid + '/likesc').valueChanges();
+  getLikes(pid) {
+    return this.afs.collection("blogs/" + pid + "/likesc").valueChanges();
   }
 
   getUserLikes(uid) {
-    return this.afs.collection('users/' + uid + '/likes', ref => ref.orderBy('date', 'desc')).valueChanges();
+    return this.afs
+      .collection("users/" + uid + "/likes", ref => ref.orderBy("date", "desc"))
+      .valueChanges();
   }
 
-  addLike(pid, uid) {
+  addLike(pid) {
+    let uid = firebase.auth().currentUser.uid;
     const data = {
       uid: uid
     };
-    this.afs.doc('blogs/' + pid + '/likesc/' + uid).set(data)
-    .then(() => console.log('post ', pid, ' liked by user ', uid));
+    this.afs
+      .doc("blogs/" + pid + "/likesc/" + uid)
+      .set(data)
+      .then(() => console.log("post ", pid, " liked by user ", uid));
   }
 
-  removeLike(pid, uid) {
-    this.afs.doc('blogs/' + pid + '/likesc/' + uid).delete()
-    .then(() => console.log('post ', pid, ' unliked by user ', uid));
+  removeLike(pid) {
+    let uid = firebase.auth().currentUser.uid;
+    this.afs
+      .doc("blogs/" + pid + "/likesc/" + uid)
+      .delete()
+      .then(() => console.log("post ", pid, " unliked by user ", uid));
   }
-
 
   encodeImageUri(imageUri, callback) {
     var c = document.createElement("canvas");
