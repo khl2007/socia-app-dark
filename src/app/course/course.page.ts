@@ -7,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursePage implements OnInit {
   
-  seg1 = true;
-  seg2 = false;
-  seg3 = false;
+  type: string;
+
   constructor() { }
 
   ngOnInit() {
+
+this.type = 'deposit';
+
   }
 
 segmentChanged(ev: any) {
