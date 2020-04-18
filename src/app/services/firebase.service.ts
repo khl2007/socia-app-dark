@@ -74,9 +74,22 @@ export class FirebaseService {
     };
     this.afs
       .collection("discuss")
-      .set(data)
+      .set(val)
       .then(() => console.log("success  "));
   }  
+
+getDisucss(levelid) {
+    //get the loged in user id
+    let currentUser = firebase.auth().currentUser.uid;
+    this.discussref = this.afs
+    .collection("discuss", ref => ref.orderBy("createdat", "desc")
+    .where("userid", "==", currentUser)
+    .where("levelid", "==", levelid));
+    this.userdicuss = this.chatref.valueChanges();
+    return this.userdicuss;
+  }
+
+
 
 
   getBlogs() {
