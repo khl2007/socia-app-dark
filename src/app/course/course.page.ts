@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course.page.scss'],
 })
 export class CoursePage implements OnInit {
-
+  
+  seg1 = true;
+  seg2 = false;
+  seg3 = false;
   constructor() { }
 
   ngOnInit() {
