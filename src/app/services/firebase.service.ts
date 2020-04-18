@@ -64,6 +64,19 @@ export class FirebaseService {
     });
   }
 
+
+   postDmsg(val) {
+    let uid = firebase.auth().currentUser.uid;
+    const data = {
+      uid: uid
+    };
+    this.afs
+      .collection("discuss")
+      .set(data)
+      .then(() => console.log("success  "));
+  }  
+
+
   getBlogs() {
     return this.afs.collection("/blogs");
   }
