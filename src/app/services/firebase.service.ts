@@ -74,7 +74,7 @@ export class FirebaseService {
     };
     this.afs
       .collection("discuss")
-      .set(val)
+      .add(val)
       .then(() => console.log("success  "));
   }  
 
