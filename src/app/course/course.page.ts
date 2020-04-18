@@ -38,7 +38,7 @@ let data = {
       crtd: this.firebaseService.getTimeSamp(),
       userid: this.firebaseService.getUserId()
     };
-    this.firebaseService.postDmsg(this.item.id, data).then(res => {
+    this.firebaseService.postDmsg(data).then(res => {
       
     });
 
