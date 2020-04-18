@@ -19,6 +19,7 @@ export class CoursePage implements OnInit {
   discusPic:string;
   image='';
   userid:any;
+  discusstions:any;
 
   constructor(private imagePicker: ImagePicker,
     public toastCtrl: ToastController,
@@ -35,13 +36,19 @@ export class CoursePage implements OnInit {
   ngOnInit() {
 
 this.type = 'seg3';
-
+this.getDiscusstions();
   }
 
 segmentChanged(ev: any) {
     console.log('Segment changed', ev);
   }
+getDiscusstions(){
 
+  this.firebaseService.getDisucss(1).subscribe(res => {
+         //console.log(res);
+         this.discusstions = res;
+          }); 
+}
 postDmsg(){
 
 let data = {

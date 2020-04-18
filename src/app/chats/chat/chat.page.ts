@@ -48,7 +48,7 @@ curentuserid : any;
        this.userid = this.route.snapshot.params['userid'];
        this.curentuserid = this.firebaseService.getUserId();
         //console.log(this.userid);
-        this.getuserdata(this.userid);
+        this.getuserdata(this.userid); 
 
          this.firebaseService.getChats(this.userid).subscribe(res => {
          //console.log(res);
