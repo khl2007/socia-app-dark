@@ -7,9 +7,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 import { HomeResolver } from './home.resolver';
-
+import { PostComponent } from '../comps/post/post.component';
 import { CommentsComponent } from '../comments/comments.component';
-
+import { UserfolowersComponent } from '../comps/userfolowers/userfolowers.component';
+import { UserfowlowComponent } from '../comps/userfowlow/userfowlow.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,9 +29,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  exports: [CommentsComponent],
-  declarations: [HomePage , CommentsComponent],
-  entryComponents: [CommentsComponent],
+  exports: [CommentsComponent,UserfolowersComponent,UserfowlowComponent,PostComponent],
+  declarations: [HomePage , CommentsComponent,UserfolowersComponent,UserfowlowComponent,PostComponent],
+  entryComponents: [CommentsComponent,UserfolowersComponent,UserfowlowComponent,],
   providers: [
     HomeResolver
   ]
