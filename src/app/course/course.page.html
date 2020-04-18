@@ -8,7 +8,7 @@
 
 <ion-progress-bar value="0.10" ></ion-progress-bar>
 
-<ion-card >
+<ion-card color="secondary">
  <ion-card-header>
     <ion-card-subtitle>you are here</ion-card-subtitle>
     <ion-card-title>lEVEL 1</ion-card-title>
@@ -57,11 +57,11 @@ Discussions
       </button>
     </ion-buttons>
   </ion-toolbar>    
-<ion-item *ngFor="let discuss of discusstions">
-  <ion-chip  class="" color="primary"> 
+
+  <ion-chip  class="" color="primary" *ngFor="let discuss of discusstions"> 
     <ion-label > {{discuss.msg}} </ion-label>
   </ion-chip>
-  </ion-item>
+ 
 </div>
 
 </div>
