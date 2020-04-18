@@ -82,7 +82,7 @@ getDisucss(levelid) {
     //get the loged in user id
     let currentUser = firebase.auth().currentUser.uid;
     this.discussref = this.afs
-    .collection("discuss", ref => ref.orderBy("createdat", "desc")
+    .collection("discuss", ref => ref.orderBy("crtd", "desc")
     .where("userid", "==", currentUser)
     .where("levelid", "==", levelid));
     this.userdiscuss = this.discussref.valueChanges();

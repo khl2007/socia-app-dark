@@ -14,8 +14,8 @@
 
 <ion-content>
 	
-<ion-list *ngFor="let userfr of friends ">
-  <ion-item>
+<ion-list  color="secondary">
+  <ion-item color="secondary" *ngFor="let userfr of friends ">
           <ion-avatar slot="start" [routerLink]="['/chats/chat', userfr.fuserid]">
             <img [src]=userfr.useravtar>
           </ion-avatar>
