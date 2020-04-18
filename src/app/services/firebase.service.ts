@@ -28,11 +28,13 @@ export class FirebaseService {
   blogsRef: AngularFirestoreCollection<Blogitem>;
   commsRef: AngularFirestoreCollection<any>;
   chatref: AngularFirestoreCollection<any>;
+  discussref: AngularFirestoreCollection<any>;
   userfriends: Observable<Userfriends[]>;
 
   chatfriref: AngularFirestoreCollection<any>;
 
   userchats: Observable<any[]>;
+  userdiscuss: Observable<any[]>;
   curentuserid :any;
   feedItem: Observable<Feed[]>;
   feeditems: any[];
