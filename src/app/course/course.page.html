@@ -19,7 +19,7 @@
   </ion-item>
 
 <ion-card-content>
-    <ion-segment (ionChange)="segmentChanged($event)" color="primary " mode="md">
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="type" color="primary " mode="md">
   <ion-segment-button value="seg1">
     <ion-label>content</ion-label>
   </ion-segment-button>
@@ -32,16 +32,22 @@
   </ion-segment-button>
 
 </ion-segment> 
-<div *ngIf= " seg1 ">
+
+<div [ngSwitch]="type">
+
+<div *ngSwitchCase="'seg1'" >
 contenet
 </div>
 
-<div *ngIf= " seg2 " >
+<div *ngSwitchCase="'seg2'" >
 Recourses 
 </div>
 
-<div *ngIf= " seg3 " >
+<div *ngSwitchCase="'seg3'" >
 Discussions
+
+</div>
+
 </div>
 
 </ion-card-content>
