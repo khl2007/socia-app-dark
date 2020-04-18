@@ -34,11 +34,11 @@ postDmsg(){
 let data = {
       msg: this.discussMsg,
       imgurl: this.image,
-      levelid:1;
+      levelid:1,
       crtd: this.firebaseService.getTimeSamp(),
       userid: this.firebaseService.getUserId()
     };
-    this.firebaseService.updateTask(this.item.id, data).then(res => {
+    this.firebaseService.postDmsg(this.item.id, data).then(res => {
       
     });
 
