@@ -48,6 +48,14 @@ const routes: Routes = [
   {
     path: 'setting',
     loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
+  },
+  {
+    path: 'notfication',
+    loadChildren: () => import('./notfication/notfication.module').then( m => m.NotficationPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   }
   // { path: 'new-task-modal', loadChildren: './new-task-modal/new-task-modal.module#NewTaskModalPageModule' },
 ];
