@@ -57,7 +57,7 @@ Discussions
       </button>
     </ion-buttons>
   </ion-toolbar>    
-  <div >
+  <div *ngFor="let discuss of discusstions">
   <ion-chip  class="" color="primary" > 
     <ion-label > {{discuss.msg}} </ion-label>
   </ion-chip>
