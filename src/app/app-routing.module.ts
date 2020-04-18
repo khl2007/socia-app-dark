@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'maincourse',
     loadChildren: () => import('./maincourse/maincourse.module').then( m => m.MaincoursePageModule)
+  },
+  {
+    path: 'setting',
+    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
   }
   // { path: 'new-task-modal', loadChildren: './new-task-modal/new-task-modal.module#NewTaskModalPageModule' },
 ];
