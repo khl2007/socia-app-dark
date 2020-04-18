@@ -8,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class CoursePage implements OnInit {
   
   type: string;
+  discussMsg: string;
+  discusPic:string;
+  constructor() { 
 
-  constructor() { }
+this.type = 'deposit';
+
+}
 
   ngOnInit() {
 
@@ -20,5 +25,10 @@ this.type = 'deposit';
 segmentChanged(ev: any) {
     console.log('Segment changed', ev);
   }
+
+postDmsg(){
+
+this.discussMsg='';
+}
 
 }
