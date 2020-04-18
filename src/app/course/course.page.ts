@@ -34,9 +34,9 @@ postDmsg(){
 let data = {
       msg: this.discussMsg,
       imgurl: this.image,
-      likes: this.item.likes,
-      crtd: this.item.crtd,
-      userid: this.item.byuser
+      levelid:1;
+      crtd: this.firebaseService.getTimeSamp(),
+      userid: this.firebaseService.getUserId()
     };
     this.firebaseService.updateTask(this.item.id, data).then(res => {
       
