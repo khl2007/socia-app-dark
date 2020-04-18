@@ -111,6 +111,8 @@ openImagePicker(){
       console.log(err);
     })
   }
-
+ async presentLoading(loading) {
+    return await loading.present();
+  }
 
 }

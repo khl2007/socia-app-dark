@@ -40,8 +40,7 @@ const routes: Routes = [
   {
     path: 'myprofile',
     loadChildren: () => import('./myprofile/myprofile.module').then( m => m.MyprofilePageModule)
-  }
-  ,
+  },
   {
     path: 'maincourse',
     loadChildren: () => import('./maincourse/maincourse.module').then( m => m.MaincoursePageModule)
