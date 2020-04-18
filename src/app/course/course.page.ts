@@ -20,7 +20,13 @@ export class CoursePage implements OnInit {
   image:any;
   userid:any;
 
-  constructor() { 
+  constructor(private imagePicker: ImagePicker,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+    public router: Router,
+    private formBuilder: FormBuilder,
+    private firebaseService: FirebaseService,
+    private webview: WebView) { 
 
 this.type = 'deposit';
 
