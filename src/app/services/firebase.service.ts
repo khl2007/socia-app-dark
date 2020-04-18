@@ -85,8 +85,8 @@ getDisucss(levelid) {
     .collection("discuss", ref => ref.orderBy("createdat", "desc")
     .where("userid", "==", currentUser)
     .where("levelid", "==", levelid));
-    this.userdicuss = this.chatref.valueChanges();
-    return this.userdicuss;
+    this.userdiscuss = this.chatref.valueChanges();
+    return this.userdiscuss;
   }
 
 

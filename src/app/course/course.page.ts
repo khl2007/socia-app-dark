@@ -17,7 +17,7 @@ export class CoursePage implements OnInit {
   type: string;
   discussMsg: string;
   discusPic:string;
-  image:any;
+  image='';
   userid:any;
 
   constructor(private imagePicker: ImagePicker,
@@ -28,13 +28,13 @@ export class CoursePage implements OnInit {
     private firebaseService: FirebaseService,
     private webview: WebView) { 
 
-this.type = 'deposit';
+
 
 }
 
   ngOnInit() {
 
-this.type = 'deposit';
+this.type = 'seg3';
 
   }
 
@@ -51,14 +51,12 @@ let data = {
       crtd: this.firebaseService.getTimeSamp(),
       userid: this.firebaseService.getUserId()
     };
-    this.firebaseService.postDmsg(data).then(res => {
-      
-    });
+    this.firebaseService.postDmsg(data);
 
 this.discussMsg='';
 }
   
-
+ 
 openImagePicker(){
     this.imagePicker.hasReadPermission()
     .then((result) => {
