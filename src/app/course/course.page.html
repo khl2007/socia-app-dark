@@ -17,15 +17,19 @@
   <ion-item>
     <ion-progress-bar value="0.10" ></ion-progress-bar>
   </ion-item>
-</ion-card>
 
-<ion-segment (ionChange)="segmentChanged($event)" color="primary " mode="md">
+<ion-card-content>
+    <ion-segment (ionChange)="segmentChanged($event)" color="primary " mode="md">
   <ion-segment-button value="friends">
     <ion-label>Friends</ion-label>
   </ion-segment-button>
   <ion-segment-button value="enemies">
     <ion-label>Enemies</ion-label>
   </ion-segment-button>
-</ion-segment>
+</ion-segment> 
+</ion-card-content>
+
+</ion-card>
+
 
 </ion-content>
