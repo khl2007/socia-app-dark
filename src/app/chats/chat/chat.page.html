@@ -2,11 +2,12 @@
   <ion-toolbar>
     <ion-buttons slot="start">
        <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons> 
-
-<ion-avatar class="ion-hide">
+	   <ion-avatar class="ion-hide">
 	<img [src]="userData.avatar">
     </ion-avatar>
+    </ion-buttons> 
+
+
 
     <ion-title> {{userData.displayName}} </ion-title>
     <ion-buttons slot="end">
@@ -36,17 +37,17 @@
        </ng-template> 
 
 </ion-item>
-
+ 
 
 
 </ion-content>
 <ion-footer ion-fixed>    
-  <ion-toolbar class="no-border" color="white">        
+  <ion-toolbar class="no-border" color="secondary">        
     <ion-input [(ngModel)]="newmessage" placeholder="Write your message ..."></ion-input>  
     <ion-buttons slot="end">
-      <button ion-button (click)="addmessage()">
+      <ion-button fill="clear" ion-button (click)="addmessage()">
         <ion-icon name="send" color="primary"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>    
 </ion-footer>
