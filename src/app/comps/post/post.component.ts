@@ -66,7 +66,7 @@ export class PostComponent implements OnInit {
 
 
   constructor(public loadingCtrl: LoadingController,
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private postService: FirebaseService,
