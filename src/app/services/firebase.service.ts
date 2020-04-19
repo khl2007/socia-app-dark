@@ -180,22 +180,8 @@ getDisucss(levelid) {
           const bloglikes = data.likes;
           const blogcrtd = data.crtd;
           
-          let heartbutton = "danger";
-            this.isLiked(blogid).subscribe(followinguser => {
-            
-            if (followinguser[0]) {
-              heartbutton ="danger";
-             return  this.setliked(true);
-            
-            }
-          });
-          
-          if (this.islikedref) {
-            heartbutton = "danger";
-          } else {
-             heartbutton = "primary"; 
-          }
-          //this.startq = c[0].payload.doc;
+          const heartbutton = this.setliked(blogid);
+   
 
           return this.afs
             .doc("users/" + userid)
@@ -220,8 +206,24 @@ getDisucss(levelid) {
       flatMap(feeds => combineLatest(feeds))
     );
   }
-setliked(val){
-this.islikedref = val;
+
+
+setliked(blogid){
+
+let heartbutton = "danger";
+
+this.isLiked(blogid).subscribe(followinguser => {
+            
+            if (followinguser[0]) {
+              heartbutton ="danger";
+            
+            
+            }else {
+                   heartbutton ="secondary";
+                  }
+          });
+          
+          return heartbutton;
 }
   sellectAllNews() {
     let x = null;
