@@ -100,6 +100,82 @@ this.auth.getAuthState().subscribe(
   }
 
 
+ getComments(pid) {
+    this.postService.getComments(pid).subscribe(comments => {
+      if (comments) {
+        this.commentLen = comments.length;
+        this.comments = comments;
+      }
+    });
+  }
+
+  getLikes(pid) {
+    this.likeService.getLikes(pid).subscribe(likes => {
+      this.likes = likes;
+      this.likeLen = likes.length;
+      this.auth.getAuthState().subscribe(
+        user => {
+          if (user) {
+            this.currentuser = user;
+            this.likes.forEach(like => {
+              if (like.uid === user.uid) {
+                this.isLiked = true;
+                this.likeStyle = 'fa fa-thumbs-up post-liked';
+              }
+            });
+          }
+        });
+    });
+  }
+
+  clickLike() {
+    if (this.currentuser) {
+      if (!this.isLiked) {
+        this.likeStyle = 'fa fa-thumbs-up post-liked';
+        this.likeService.addLike(this.pid, this.currentuser.uid);
+        this.isLiked = true;
+      } else {
+        this.likeStyle = 'fa fa-thumbs-o-up';
+        this.likeService.removeLike(this.pid, this.currentuser.uid);
+        this.isLiked = false;
+      }
+    }
+  }
+
+
+delete() {
+   // this.postService.deletePost(this.pid);
+  }
+
+ 
+
+  retrieveDate(date, type?) {
+    if (date) {
+      if (type === 'long') {
+        return this.dateFormat.transform(date, type);
+      } else {
+        const prevDate = date;
+        const newDate = new Date();
+        const ms = newDate.getTime() - prevDate.getTime();
+        const min = Math.trunc(ms / 60000);
+        let hours;
+        if (min < 59) {
+          if (min < 1) {
+            return 'just now';
+          }
+          return min + 'm';
+        } else {
+          hours = Math.trunc(min / 60);
+          if (hours >= 1 && hours < 24) {
+            return hours + 'h';
+          } else {
+            return this.dateFormat.transform(prevDate);
+          }
+        }
+      }
+    }
+  }
+
 
 
 
