@@ -16,6 +16,8 @@ import { FirebaseService } from "../../services/firebase.service";
 
 import { LikesService } from "../../services/likes.service";
 
+import { DateFormatPipe } from '../../services/date.pipe';
+
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -68,6 +70,7 @@ export class PostComponent implements OnInit {
   constructor(public loadingCtrl: LoadingController,
     private auth: AuthService,
     private router: Router,
+    private dateFormat: DateFormatPipe,
     private route: ActivatedRoute,
     private postService: FirebaseService,
     private animationCtrl: AnimationController,
