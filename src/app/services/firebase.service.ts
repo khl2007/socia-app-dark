@@ -93,8 +93,13 @@ getDisucss(levelid) {
 
 
   getBlogs() {
-    return this.afs.collection("/blogs");
+
+return this.afs.collection("blogs", ref =>
+        ref.orderBy("crtd", "desc").limit(100)
+      );
   }
+
+
 
 getCommentsinfo(pid) {
     return this.afs.collection("comments", ref =>
