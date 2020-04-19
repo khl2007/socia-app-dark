@@ -91,7 +91,7 @@ this.auth.getAuthState().subscribe(
           }
         });
         this.getLikes(this.inputPostID);
-        this.getComments(this.inputPost.ID);
+        this.getComments(this.inputPostID);
 
        
     }
@@ -101,7 +101,7 @@ this.auth.getAuthState().subscribe(
 
 
  getComments(pid) {
-    this.postService.getComments(pid).subscribe(comments => {
+    this.postService.getCommentsinfo(pid).subscribe(comments => {
       if (comments) {
         this.commentLen = comments.length;
         this.comments = comments;
