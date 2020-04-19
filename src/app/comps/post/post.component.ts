@@ -23,15 +23,24 @@ if (this.inputPostID) {
             this.pid = this.inputPost.pid;
             this.type = this.inputPost.type;
             this.postPhotoURL = this.inputPost.photoURL;
-
+            this.userService.retrieveUserDocumentFromID(this.inputPost.uid).subscribe(
+              user => {
+                if (user) {
+                  this.displayName = user.displayName;
+                  this.userName = user.userName;
+                  this.photoURL = user.photoURL;
+                 this.isLoaded = true;
+                }
+              }
+              );
              
-          } else {
+             } else {
             this.isInvalid = true;
           }
         });
     }
 
 
-}
+  }
 
 }
