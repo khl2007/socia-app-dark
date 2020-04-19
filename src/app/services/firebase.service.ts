@@ -251,12 +251,17 @@ this.isLiked(blogid).subscribe(followinguser => {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
 
-  getUserInfo(userid: string): Observable<User> {
+  /*getUserInfo(userid: string): Observable<User> {
     //let currentUser = firebase.auth().currentUser;
 
     const userDetails = this.afs.doc<User>("users/" + userid).valueChanges();
     return userDetails;
+  }*/
+
+getUserInfo(uid) {
+    return this.afs.doc<any>('users/' + uid).valueChanges();
   }
+
 
   getUserBlogs(userid: string): Observable<Blogitem[]> {
     const blogs = this.afs
