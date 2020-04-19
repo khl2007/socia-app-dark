@@ -1,4 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild } from "@angular/core";
+import { AuthService } from "../../services/auth.service";
+import { LoadingController } from "@ionic/angular";
+import { Router, ActivatedRoute } from "@angular/router";
+
+import { Animation, AnimationController  } from '@ionic/angular';
+
+import { IonInfiniteScroll } from '@ionic/angular';
+
+import { Observable } from "rxjs";
+
+import { map } from "rxjs/operators";
+
+
+import { FirebaseService } from "../../services/firebase.service";
+
+import { LikesService } from "../../services/likes.service";
 
 @Component({
   selector: 'app-post',
@@ -49,7 +65,13 @@ export class PostComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(public loadingCtrl: LoadingController,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private postService: FirebaseService,
+    private animationCtrl: AnimationController,
+    private likeService: LikesService) { }
 
   ngOnInit() {
 
@@ -65,7 +87,7 @@ if (this.inputPostID) {
            // this.pid = this.inputPost.pid;
             // this.type = this.inputPost.type;
             this.postPhotoURL = this.inputPost.imgurl;
-            this.userService.getUserInfo(this.inputPost.byuser).subscribe(
+            this.postService.getUserInfo(this.inputPost.byuser).subscribe(
               user => {
                 if (user) {
                   this.displayName = user.displayName;
