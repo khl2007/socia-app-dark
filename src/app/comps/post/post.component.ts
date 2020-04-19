@@ -33,8 +33,8 @@ if (this.inputPostID) {
               user => {
                 if (user) {
                   this.displayName = user.displayName;
-                  this.userName = user.userName;
-                  this.photoURL = user.photoURL;
+                  //this.userName = user.userName;
+                  this.photoURL = user.avatar;
                  this.isLoaded = true;
                 }
               }
