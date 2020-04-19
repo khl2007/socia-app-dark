@@ -95,6 +95,17 @@ getDisucss(levelid) {
   getBlogs() {
     return this.afs.collection("/blogs");
   }
+
+getCommentsinfo(pid) {
+    return this.afs.collection("comments", ref =>
+      ref
+        .orderBy("crtd", "desc")
+        .limit(100)
+        .where("pid", "==", poid)
+    ).valueChanges();
+  }
+
+
   getComments(poid) {
     let currentUser = firebase.auth().currentUser.uid;
     this.commsRef = this.afs.collection("comments", ref =>
