@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ModalController } from '@ionic/angular';
 import { CommentsComponent } from '../comments/comments.component';
 
+import { PostComponent } from '../comps/post/post.component';
+
 //import { Animation, AnimationController } from '@ionic/angular';
 
 import { IonInfiniteScroll } from '@ionic/angular';
@@ -31,6 +33,9 @@ items: Array<any>;
   crtusertest: Observable<User>;
   blogs: any;
   postfeed :any;
+
+feedPosts:any;
+
   crtuser: Observable<User>;
   someuser: any;
   public like_btn = {
@@ -106,11 +111,11 @@ async presentcommtsModal(poid) {
       .snapshotChanges()
       .pipe(
         map(changes =>
-          changes.map(c => ({ key: c.payload.doc.id, ...c.payload.doc.data() }))
+          changes.map(c => ({ id: c.payload.doc.id, ...c.payload.doc.data() }))
         )
       )
       .subscribe(blogs => {
-        this.blogs = blogs;
+        this.feedPosts = blogs;
       });
   }
 
