@@ -30,5 +30,10 @@ public getPost(pid) {
     return this.afs.doc<any>('blogs/' + pid).valueChanges();
   }
 
+public deletePost (pid) {
+    this.afs.doc<any>('posts/' + pid).delete();
+  }
+
+
 
 }
