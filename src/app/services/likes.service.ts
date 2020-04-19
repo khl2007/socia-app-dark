@@ -9,7 +9,9 @@ import "firebase/storage";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable, combineLatest } from "rxjs";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class LikesService {
 
   constructor(
