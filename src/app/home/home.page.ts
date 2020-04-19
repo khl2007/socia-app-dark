@@ -64,7 +64,7 @@ feedPosts:any;
     if (this.route && this.route.data) {
       this.getData();
     }
-    //this.getBlogs();
+    this.getBlogs();
     //this.getCrtusertest();
     //this.getCrtusertestt();
     //this.postfeed= this.firebaseService.sellectAllNews();
