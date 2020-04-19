@@ -404,6 +404,17 @@ this.isLiked(blogid).subscribe(followinguser => {
     });
   }
 
+ public getPost(pid) {
+    return this.afs.doc<any>('blogs/' + pid).valueChanges();
+  }
+
+  // Delete post
+  public deletePost (pid) {
+    this.afs.doc<any>('blogs/' + pid).delete();
+  }
+
+
+
   unsubscribeOnLogOut() {
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();
