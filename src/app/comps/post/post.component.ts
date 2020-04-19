@@ -58,14 +58,14 @@ if (this.inputPostID) {
         post => {
           if (post) {
             this.inputPost = post;
-            this.inputPostID = null;
+            //this.inputPostID = null;
             this.isInvalid = false;
             this.body = this.inputPost.body;
             this.date = this.inputPost.crtd;
            // this.pid = this.inputPost.pid;
             // this.type = this.inputPost.type;
             this.postPhotoURL = this.inputPost.imgurl;
-            this.userService.retrieveUserDocumentFromID(this.inputPost.byuser).subscribe(
+            this.userService.getUserInfo(this.inputPost.byuser).subscribe(
               user => {
                 if (user) {
                   this.displayName = user.displayName;
