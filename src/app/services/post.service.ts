@@ -26,4 +26,9 @@ export class PostService {
     
   ) { }
 
+public getPost(pid) {
+    return this.afs.doc<any>('posts/' + pid).valueChanges();
+  }
+
+
 }
