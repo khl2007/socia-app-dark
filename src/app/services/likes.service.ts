@@ -1,5 +1,13 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { Injectable } from "@angular/core";
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from "@angular/fire/firestore";
+import * as firebase from "firebase/app";
+import "firebase/storage";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { Observable, combineLatest } from "rxjs";
 
 @Injectable()
 export class LikesService {
