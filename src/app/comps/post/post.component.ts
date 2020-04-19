@@ -25,11 +25,11 @@ if (this.inputPostID) {
             this.inputPostID = null;
             this.isInvalid = false;
             this.body = this.inputPost.body;
-            this.date = this.inputPost.date;
-            this.pid = this.inputPost.pid;
-            this.type = this.inputPost.type;
-            this.postPhotoURL = this.inputPost.photoURL;
-            this.userService.retrieveUserDocumentFromID(this.inputPost.uid).subscribe(
+            this.date = this.inputPost.crtd;
+           // this.pid = this.inputPost.pid;
+            // this.type = this.inputPost.type;
+            this.postPhotoURL = this.inputPost.imgurl;
+            this.userService.retrieveUserDocumentFromID(this.inputPost.byuser).subscribe(
               user => {
                 if (user) {
                   this.displayName = user.displayName;
