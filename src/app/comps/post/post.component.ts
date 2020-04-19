@@ -80,9 +80,28 @@ if (this.inputPostID) {
             this.isInvalid = true;
           }
         });
+
+this.auth.getAuthState().subscribe(
+        user => {
+          if (user) {
+            if (this.inputPost.byuser === user.uid) {
+              this.currentuser = user.uid;
+              this.isCurrentUser = true;
+            }
+          }
+        });
+        this.getLikes(this.inputPostID);
+        this.getComments(this.inputPost.ID);
+
+       
     }
 
 
   }
+
+
+
+
+
 
 }
